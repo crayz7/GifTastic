@@ -19,7 +19,7 @@ function displayCar() {
 			var p = $("<p>").text("Rating: " + rating);
 
 			var carImage = $('<img>');
-			carImage.attr('src', results[i].images.fixed_height.url);
+			carImage.attr({'src':results[i].images.fixed_height_still.url, 'data-still':results[i].images.fixed_height_still.url, 'data-animate':results[i].images.fixed_height.url, 'data-state':"still", 'class':'gif'});
 
 			gifDiv.prepend(p);
             gifDiv.prepend(carImage);
@@ -61,6 +61,19 @@ $("#add-car").on("click", function(event) {
         // Calling renderButtons which handles the processing of our movie array
         renderButtons();
       });
+
+$('.gifs').on("click", function() {
+	var state = $(this).attr("data-state");
+	if (state == 'still') {
+          $(this).attr('src', $(this).attr('data-animate'));
+          $(this).attr('data-state', 'animate')
+        }
+
+        if (state == 'animate') {
+          $(this).attr('src', $(this).attr('data-still'));
+          $(this).attr('data-state', 'still')
+        }
+});
 
 $(document).on("click", ".cars", displayCar);
 renderButtons();
