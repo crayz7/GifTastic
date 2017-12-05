@@ -25,6 +25,7 @@ function displayCar() {
             gifDiv.prepend(carImage);
 
             $('#gifResults').prepend(gifDiv);
+
     }
   });
 };
@@ -50,19 +51,7 @@ function renderButtons() {
       	}
 }
 
-$("#add-car").on("click", function(event) {
-        event.preventDefault();
-        // This line of code will grab the input from the textbox
-        var car = $("#car-input").val().trim();
-
-        // The movie from the textbox is then added to our array
-        cars.push(car);
-
-        // Calling renderButtons which handles the processing of our movie array
-        renderButtons();
-      });
-
-$('.gif').on("click", function() {
+  $(document).on("click", '.gif', function() {
 	var state = $(this).attr("data-state");
 	if (state == 'still') {
           $(this).attr('src', $(this).attr('data-animate'));
@@ -77,4 +66,3 @@ $('.gif').on("click", function() {
 
 $(document).on("click", ".cars", displayCar);
 renderButtons();
-
